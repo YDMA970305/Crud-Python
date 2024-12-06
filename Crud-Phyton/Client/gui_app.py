@@ -143,7 +143,7 @@ class Frame(tk.Frame):
         self.tabla_clientes.heading("#4", text="Matricula")
         self.tabla_clientes.heading("#5", text="Fecha")
         
-        self.tabla_clientes.insert("", 0, text="123456789", values=("123456789", "Melisa mamasita hermosa", "Calle 1", "juanperez@gmail.com", "123456789", "2022-01-01"))
+       
         self.tabla_clientes.insert("", 1, text="123456789", values=("123456789", "Juan Perez", "Calle 1", "juanperez@gmail.com", "123456789", "2022-01-01"))
         
         #botones editar y eliminar
