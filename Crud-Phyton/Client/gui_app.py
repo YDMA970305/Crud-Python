@@ -2,7 +2,7 @@ import tkinter as tk
 
 def barra_menu(root):
     barra_menu = tk.Menu(root)
-    root.config(menu=barra_menu,width=480,height=600)
+    root.config(menu=barra_menu,width=600,height=600)
     
     menu_inicio = tk.Menu(barra_menu, tearoff=0)
     barra_menu.add_cascade(label="Inicio", menu=menu_inicio)
@@ -16,12 +16,17 @@ def barra_menu(root):
 
 class Frame(tk.Frame):
     def __init__(self, root=None):
-        super().__init__(root,width=480, height=600)
+        super().__init__(root,width=600,height=600)
         self.root = root
         self.pack()
         #self.config(bg="green")
         
+        
+        
         self.campos_cliente()
+        self.after(1, self.desabilitar_campos)
+        
+        
         
     def campos_cliente(self):
         #campos de cliente label
@@ -50,48 +55,55 @@ class Frame(tk.Frame):
         self.fecha.grid(row=5, column=0, padx=10, pady=10)
         
        #Entradas de cliente
-        self_entry_dni_cliente = tk.Entry(self)
-        self_entry_dni_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_dni_cliente.grid(row=0, column=1, padx=10, pady=10, columnspan=2)
+        self.entry_dni_cliente = tk.Entry(self)
+        self.entry_dni_cliente.config( font=("Arial", 12,))
+        self.entry_dni_cliente.grid(row=0, column=1, padx=10, pady=10,columnspan=2)
         
-        self_entry_nombre_cliente = tk.Entry(self)
-        self_entry_nombre_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_nombre_cliente.grid(row=1, column=1, padx=10, pady=10, columnspan=2)
+        self.entry_nombre_cliente = tk.Entry(self)
+        self.entry_nombre_cliente.config( font=("Arial", 12,))
+        self.entry_nombre_cliente.grid(row=1, column=1, padx=10, pady=10, columnspan=2)
         
-        self_entry_direccion_cliente = tk.Entry(self)        
-        self_entry_direccion_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_direccion_cliente.grid(row=2, column=1, padx=10, pady=10, columnspan=2)
+        self.entry_direccion_cliente = tk.Entry(self)        
+        self.entry_direccion_cliente.config( font=("Arial", 12,))
+        self.entry_direccion_cliente.grid(row=2, column=1, padx=10, pady=10, columnspan=2)
         
-        self_entry_email_cliente = tk.Entry(self)
-        self_entry_email_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_email_cliente.grid(row=3, column=1, padx=10, pady=10, columnspan=2)
+        self.entry_email_cliente = tk.Entry(self)
+        self.entry_email_cliente.config(font=("Arial", 12,))
+        self.entry_email_cliente.grid(row=3, column=1, padx=10, pady=10, columnspan=2)
         
-        self_entry_matricula_cliente = tk.Entry(self)
-        self_entry_matricula_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_matricula_cliente.grid(row=4, column=1, padx=10, pady=10,columnspan=2)
+        self.entry_matricula_cliente = tk.Entry(self)
+        self.entry_matricula_cliente.config( font=("Arial", 12,))
+        self.entry_matricula_cliente.grid(row=4, column=1, padx=10, pady=10,columnspan=2)
         
-        self_entry_fecha_cliente = tk.Entry(self)
-        self_entry_fecha_cliente.config(width=10, font=("Arial", 12,))
-        self_entry_fecha_cliente.grid(row=5, column=1, padx=10, pady=10, columnspan=2)
+        self.entry_fecha_cliente = tk.Entry(self)
+        self.entry_fecha_cliente.config(state='disabled', font=("Arial", 12,))
+        self.entry_fecha_cliente.grid(row=5, column=1, padx=10, pady=10, columnspan=2)
         
         #Botones
-        self.btn_crear_cliente = tk.Button(self, text="Crear Cliente")
-        self.btn_crear_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#158645',
+        self.btn_agregar_cliente = tk.Button(self, text="Agregar Cliente")
+        self.btn_agregar_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#158645',
                                       cursor='hand2',activebackground='#35BD6F')
-        self.btn_crear_cliente.grid(row=6, column=0, padx=10, pady=10)
+        self.btn_agregar_cliente.grid(row=6, column=0, padx=10, pady=10)
         
-        self.btn_eliminar_cliente = tk.Button(self, text="Eliminar Cliente")
-        self.btn_eliminar_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#BD152E',
+        self.btn_guardar_cliente = tk.Button(self, text="Guardar Cliente")
+        self.btn_guardar_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#1658A2',
+                                      cursor='hand2',activebackground='#3586DF')
+        self.btn_guardar_cliente.grid(row=6, column=1, padx=10, pady=10)
+        
+        self.btn_cancelar_cliente = tk.Button(self, text="Cancelar")
+        self.btn_cancelar_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#BD152E',
                                       cursor='hand2',activebackground='#E15370')
-        self.btn_eliminar_cliente.grid(row=6, column=1, padx=10, pady=10)
+        self.btn_cancelar_cliente.grid(row=6, column=2, padx=10, pady=10)
+    
+    
+    def desabilitar_campos(self):
+        self.entry_dni_cliente.config(state='disabled')
+        self.entry_nombre_cliente.config(state='disabled')
+        self.entry_direccion_cliente.config(state='disabled')
+        self.entry_email_cliente.config(state='disabled')
+        self.entry_matricula_cliente.config(state='disabled')
+       
         
-        self.btn_editar_cliente = tk.Button(self, text="Editar Cliente")
-        self.btn_editar_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#158645',
-                                      cursor='hand2',activebackground='#35BD6F')
-        self.btn_editar_cliente.grid(row=6, column=2, padx=10, pady=10)
-        
-        self.btn_ver_cliente = tk.Button(self, text="Ver Cliente")
-        self.btn_ver_cliente.config(width=20,font=("Arial", 12, "bold"),fg='#DAD5D6',bg='#158645',
-                                      cursor='hand2',activebackground='#35BD6F')
-        self.btn_ver_cliente.grid(row=6, column=3, padx=10, pady=10)
+    def habilitar_campos(self):
+        pass
         
